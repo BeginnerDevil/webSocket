@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>demo</h1>
+</body>
+<script>
+    console.log('socket')
+    window.onload = function () {
+        let ws;
+        if (typeof (WebSocket) == 'undefined') {
+            alert('当前浏览器不支持  WebSocket 请更换浏览器')
+        } else {
+            ws = new WebSocket('ws://localhost:8081');
+            ws.onopen = function () {
+                console.log("client：打开连接");
+                ws.send("client：hello 服务端");
+            };
+            ws.onmessage = function (e) {
+                console.log(e.data);
+                // setTimeout(() => {
+                //     ws.close();
+                // }, 5000);
+            };
+            ws.onclose = function (params) {
+                console.log("client：关闭连接");
+            };
+        }
+
+
+    }
+</script>
+
+</html>
